@@ -6,9 +6,9 @@ class App extends Component {
   /************************ States BEGIN here ************************/
   state = {
     persons: [
-      { name: 'Masoud', age: 29 },
-      { name: 'Af', age: 23 },
-      { name: 'Mor', age: 34}
+      { id: 1, name: 'Masoud', age: 29 },
+      { id: 2, name: 'Af', age: 23 },
+      { id: 3,name: 'Mor', age: 34}
     ],
     otherState: 'some other value',
     showPersons: false
@@ -30,7 +30,9 @@ class App extends Component {
     this.setState({showPersons : !doesShow})
   }
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons;
+    // const persons = this.state.persons.slice(); 
+    //for a better approach than the line above (spread op):
+    const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons : persons});
   }
@@ -54,7 +56,8 @@ class App extends Component {
             return <Person 
             click={() => this.deletePersonHandler(index)}
             name={person.name} 
-            age={person.age} />
+            age={person.age}
+            key={person.id} />
           })}
         </div>
       );
