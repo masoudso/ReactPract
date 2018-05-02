@@ -17,13 +17,27 @@ class App extends Component {
 
   /************************ Mthods BEGIN here ************************/
 
-  nameChangedHandler = (event) => {
-    this.setState( {
-      persons: [
-        { name: 'Masoud', age: 29 },
-        { name: event.target.value, age: 23 }
-      ]
-    } )
+  //in this method, you're passing in the event(whatever changes down there) and
+  //the id. once receiving them, this method compares the id, with the id for 
+  //each element in the "persons" array, 
+  //if found, returns the index of that element:
+  nameChangedHandler = (event, id) => {
+
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+    //now, make a copy of person using spread op to create 
+    //a new person with the index found above
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+    //set the persons name to the value user inputs
+    person.name = event.target.value;
+    //make a copy of the whole array using spread op
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( { persons: persons } )
   }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -57,7 +71,8 @@ class App extends Component {
             click={() => this.deletePersonHandler(index)}
             name={person.name} 
             age={person.age}
-            key={person.id} />
+            key={person.id}
+            changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       );
