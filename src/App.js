@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium'
 import './App.css';
 import Person from './Person/Person';
 
@@ -10,6 +11,7 @@ class App extends Component {
       { id: 2, name: 'Af', age: 23 },
       { id: 3,name: 'Mor', age: 34}
     ],
+    content: 'Show Content',
     otherState: 'some other value',
     showPersons: false
   }
@@ -42,6 +44,9 @@ class App extends Component {
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({showPersons : !doesShow})
+    if(this.state.showPersons){
+      this.setState({content : 'Show Content'})
+    }else {this.setState({content : 'Hide Content'})}
   }
   deletePersonHandler = (personIndex) => {
     // const persons = this.state.persons.slice(); 
@@ -60,7 +65,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor : 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -78,6 +87,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red'
+      style[':hover'] = {
+        backgroundColor : 'salmon',
+        color : 'black'
+      }
     }
     let classes = [];
     if(this.state.persons.length <= 2){
@@ -93,11 +106,11 @@ class App extends Component {
         <p className={classes.join(' ')}> React is the paddles!</p>
         <button
           style={style}
-          onClick={this.togglePersonsHandler}>Switch Name</button>
+          onClick={this.togglePersonsHandler}>{this.state.content}</button>
         {persons}
       </div>
     );
   }
 }
 
-export default App;
+export default Radium (App);
