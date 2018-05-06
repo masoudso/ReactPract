@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -83,18 +83,18 @@ class App extends Component {
       );
       style.backgroundColor = 'red'
     }
-    let classes = [];
+    let assignedClasses = [];
     if(this.state.persons.length <= 2){
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if(this.state.persons.length <= 1){
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
     
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Masoud Soltanveis</h1>
-        <p className={classes.join(' ')}> React is the paddles!</p>
+        <p className={assignedClasses.join(' ')}> React is the paddles!</p>
         <button
           style={style}
           onClick={this.togglePersonsHandler}>{this.state.content}</button>
