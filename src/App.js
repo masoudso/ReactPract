@@ -58,15 +58,8 @@ class App extends Component {
 
   /************************ Render() BEGINS here ************************/
   render () {
-    const style = {
-      backgroundColor : 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
+    
+    let btnClass = '';
     let persons = null;
     if(this.state.showPersons){
       persons = (
@@ -81,7 +74,7 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red'
+      btnClass = classes.red;
     }
     let assignedClasses = [];
     if(this.state.persons.length <= 2){
@@ -95,8 +88,7 @@ class App extends Component {
       <div className={classes.App}>
         <h1>Masoud Soltanveis</h1>
         <p className={assignedClasses.join(' ')}> React is the paddles!</p>
-        <button
-          style={style}
+        <button className = {btnClass}
           onClick={this.togglePersonsHandler}>{this.state.content}</button>
         {persons}
       </div>
