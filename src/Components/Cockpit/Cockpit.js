@@ -16,6 +16,8 @@ const cockpit = (props) => {
     return (
         <div className={classes.Cockpit}>
             <h1>Masoud Soltanveis</h1>
+            {/* passing the name from index.js to app.js and then to cockpit.js */}
+            <h2>{props.appName}</h2>
             <p className={assignedClasses.join(' ')}> React is the paddles!</p>
             <button
                 className={btnClass}

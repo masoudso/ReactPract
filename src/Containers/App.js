@@ -75,7 +75,8 @@ class App extends Component {
         showPersons={this.state.showPersons}
         persons={this.state.persons}
         content={this.state.content}
-        clicked={this.togglePersonsHandler} />
+        clicked={this.togglePersonsHandler}
+        appName={this.props.name} />
         {persons}
       </div>
     );
